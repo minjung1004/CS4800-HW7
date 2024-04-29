@@ -1,5 +1,6 @@
 package Flyweight;
 import java.io.*;
+import java.util.Random;
 
 
 public class TextEditor {
@@ -9,6 +10,7 @@ public class TextEditor {
         String[] colors = {"Red", "Blue", "Black"};
         int[] sizes = {12, 14,16};
 
+        Random random = new Random();
         for (int i = 0; i < 4; i++) {
             Document document = new Document();
 
@@ -21,6 +23,11 @@ public class TextEditor {
                 int character;
                 while ((character = reader.read()) != -1) {
                     char c = (char) character;
+
+                    fontIndex = random.nextInt(fonts.length);
+                    colorIndex = random.nextInt(colors.length);
+                    sizeIndex = random.nextInt(sizes.length);
+
                     String font = fonts[fontIndex];
                     String color = colors[colorIndex];
                     int size = sizes[sizeIndex];
@@ -28,10 +35,6 @@ public class TextEditor {
                     // Append character to document with flyweight character properties
                     document.appendCharacter(c, font, color, size);
 
-                    // Move to the next font, color, and size for the next character
-                    fontIndex = (fontIndex + 1) % fonts.length;
-                    colorIndex = (colorIndex + 1) % colors.length;
-                    sizeIndex = (sizeIndex + 1) % sizes.length;
                 }
 
                 // Save the document to a file
