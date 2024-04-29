@@ -11,6 +11,10 @@ class Document {
                 .append(properties.getColor()).append(", ").append(properties.getSize()).append("]\n");
     }
 
+    public String getContent(){
+        return content.toString();
+    }
+
     public void saveToFile(String filename) throws IOException{
         try(PrintWriter writer = new PrintWriter(new FileWriter(filename))){
             writer.println(content.toString());
